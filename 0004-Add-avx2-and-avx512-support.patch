@@ -1,0 +1,88 @@
+From eee7713a16df0199b675cbac8f253c82d480903f Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 12 Jun 2018 18:52:58 +0000
+Subject: [PATCH 4/5] Add avx2 and avx512 support
+
+Enable support for python avx2 and avx512 libraries.
+---
+ Lib/distutils/unixccompiler.py | 22 ++++++++++++++++++++++
+ Python/dynload_shlib.c         | 16 +++++++++++++++-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+
+diff --git a/Lib/distutils/unixccompiler.py b/Lib/distutils/unixccompiler.py
+index ab4d4de..de09d99 100644
+--- a/Lib/distutils/unixccompiler.py
++++ b/Lib/distutils/unixccompiler.py
+@@ -116,6 +116,10 @@ class UnixCCompiler(CCompiler):
+         try:
+             self.spawn(compiler_so + cc_args + [src, '-o', obj] +
+                        extra_postargs)
++            self.spawn(compiler_so + cc_args+ ["-march=haswell", "-O3", "-fno-semantic-interposition", "-ffat-lto-objects", "-flto=4"] + [src, '-o', obj + ".avx2"] +
++                       extra_postargs)
++            self.spawn(compiler_so + cc_args+ ["-march=skylake-avx512", "-O3", "-fno-semantic-interposition", "-ffat-lto-objects", "-flto=4", "-mprefer-vector-width=512"] + [src, '-o', obj + ".avx512"] +
++                       extra_postargs)
+         except DistutilsExecError as msg:
+             raise CompileError(msg)
+ 
+@@ -194,6 +198,24 @@ class UnixCCompiler(CCompiler):
+                     linker = _osx_support.compiler_fixup(linker, ld_args)
+ 
+                 self.spawn(linker + ld_args)
++                ld_args = ([obj + ".avx2" for obj in objects] + self.objects +
++                       lib_opts + ['-o', output_filename + ".avx2"])
++                if debug:
++                    ld_args[:0] = ['-g']
++                if extra_preargs:
++                    ld_args[:0] = extra_preargs
++                if extra_postargs:
++                    ld_args.extend(extra_postargs)
++                self.spawn(linker + ld_args)
++                ld_args = ([obj + ".avx512" for obj in objects] + self.objects +
++                       lib_opts + ['-o', output_filename + ".avx512"])
++                if debug:
++                    ld_args[:0] = ['-g']
++                if extra_preargs:
++                    ld_args[:0] = extra_preargs
++                if extra_postargs:
++                    ld_args.extend(extra_postargs)
++                self.spawn(linker + ld_args)
+             except DistutilsExecError as msg:
+                 raise LinkError(msg)
+         else:
+diff --git a/Python/dynload_shlib.c b/Python/dynload_shlib.c
+index f271193..4315237 100644
+--- a/Python/dynload_shlib.c
++++ b/Python/dynload_shlib.c
+@@ -62,6 +62,8 @@ _PyImport_FindSharedFuncptr(const char *prefix,
+     char funcname[258];
+     char pathbuf[260];
+     int dlopenflags=0;
++    char *pathname2;
++    char *pathname3;
+ 
+     if (strchr(pathname, '/') == NULL) {
+         /* Prefix bare filename with "./" */
+@@ -93,7 +95,19 @@ _PyImport_FindSharedFuncptr(const char *prefix,
+ 
+     dlopenflags = PyThreadState_GET()->interp->dlopenflags;
+ 
+-    handle = dlopen(pathname, dlopenflags);
++    pathname2 = malloc(strlen(pathname) + strlen(".avx2") + 1);
++    sprintf(pathname2, "%s%s", pathname, ".avx2");
++    pathname3 = malloc(strlen(pathname) + strlen(".avx512") + 1);
++    sprintf(pathname3, "%s%s", pathname, ".avx512");
++
++    if (__builtin_cpu_supports("avx512dq") && access(pathname3, R_OK) == 0)
++        handle = dlopen(pathname3, dlopenflags);
++    else if (__builtin_cpu_supports("avx2") && access(pathname2, R_OK) == 0)
++        handle = dlopen(pathname2, dlopenflags);
++    else
++        handle = dlopen(pathname, dlopenflags);
++    free(pathname2);
++    free(pathname3);
+ 
+     if (handle == NULL) {
+         PyObject *mod_name;
+-- 
+2.17.0
+
