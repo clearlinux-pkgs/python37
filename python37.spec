@@ -1,6 +1,6 @@
 Name:           python37
 Version:        3.7.5
-Release:        3
+Release:        4
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
@@ -130,16 +130,16 @@ mv %{buildroot}/usr/lib/libpython*.so* %{buildroot}/usr/lib64/
 
 # --enable-optimizations does not work with --enable-shared
 # https://bugs.python.org/issue29712
-pushd ../Python-avx2
-make clean
-%configure %python_configure_flags --enable-optimizations
-make profile-opt %{?_smp_mflags}
-popd
+# pushd ../Python-avx2
+# make clean
+# configure %python_configure_flags --enable-optimizations
+# make profile-opt %{?_smp_mflags}
+# popd
 
-make clean
-%configure %python_configure_flags --enable-optimizations
-make profile-opt %{?_smp_mflags}
-%make_install
+# make clean
+# configure %python_configure_flags --enable-optimizations
+# make profile-opt %{?_smp_mflags}
+# make_install
 # static library archives need to be writable for strip to work
 install -m 0755 %{buildroot}/usr/lib/libpython3.7m.a %{buildroot}/usr/lib64/
 rm -f %{buildroot}/usr/lib/libpython3.7m.a
@@ -147,9 +147,9 @@ pushd %{buildroot}/usr/include/python3.7m
 cat %{SOURCE1} | patch -p0
 popd
 
-%check
-export LANG=C
-LD_LIBRARY_PATH=`pwd` ./python -Wd -E -tt  Lib/test/regrtest.py -v -x test_asyncio test_uuid test_subprocess || :
+#check
+#export LANG=C
+#LD_LIBRARY_PATH=`pwd` ./python -Wd -E -tt  Lib/test/regrtest.py -v -x test_asyncio test_uuid test_subprocess || :
 
 
 %files
