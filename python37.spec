@@ -1,6 +1,6 @@
 Name:           python37
 Version:        3.7.5
-Release:        4
+Release:        5
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
@@ -130,16 +130,16 @@ mv %{buildroot}/usr/lib/libpython*.so* %{buildroot}/usr/lib64/
 
 # --enable-optimizations does not work with --enable-shared
 # https://bugs.python.org/issue29712
-# pushd ../Python-avx2
-# make clean
-# configure %python_configure_flags --enable-optimizations
-# make profile-opt %{?_smp_mflags}
-# popd
+pushd ../Python-avx2
+make clean
+%configure %python_configure_flags --enable-optimizations
+make profile-opt %{?_smp_mflags}
+popd
 
-# make clean
-# configure %python_configure_flags --enable-optimizations
-# make profile-opt %{?_smp_mflags}
-# make_install
+make clean
+%configure %python_configure_flags --enable-optimizations
+make profile-opt %{?_smp_mflags}
+make_install
 # static library archives need to be writable for strip to work
 install -m 0755 %{buildroot}/usr/lib/libpython3.7m.a %{buildroot}/usr/lib64/
 rm -f %{buildroot}/usr/lib/libpython3.7m.a
