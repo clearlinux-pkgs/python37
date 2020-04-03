@@ -1,11 +1,11 @@
 Name:           python37
-Version:        3.7.5
-Release:        6
+Version:        3.7.7
+Release:        7
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
 Group:          devel/python
-Source0:        https://www.python.org/ftp/python/3.7.5/Python-3.7.5.tar.xz
+Source0:        https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tar.xz
 Source1:	constcompat.patch
 Patch1:         0001-Fix-python-path-for-linux.patch
 Patch2:         0002-Skip-tests-TODO-fix-skips.patch
@@ -15,7 +15,6 @@ Patch5:         0005-Build-avx2-and-avx512-versions-of-the-math-library.patch
 Patch6:         0001-Add-pybench-for-pgo-optimization.patch
 Patch7:         0001-pythonrun.c-telemetry-patch.patch
 Patch8:         0001-test_socket.py-remove-testPeek-test.test_socket.RDST.patch
-Patch9:         fix-regrtest-hang.patch
 
 BuildRequires:  bzip2
 BuildRequires:  db
@@ -92,7 +91,6 @@ The Python Programming Language.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
 
 pushd ..
 cp -a Python-%{version} Python-avx2
@@ -165,6 +163,9 @@ popd
 %files core
 %exclude /usr/bin/2to3
 /usr/bin/2to3-3.7
+%exclude /usr/bin/pip3
+%exclude /usr/bin/easy_install-3.7
+%exclude /usr/bin/pip3.7
 %exclude /usr/bin/idle3
 %exclude /usr/bin/idle3.7
 %exclude /usr/bin/pydoc3
