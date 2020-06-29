@@ -1,4 +1,4 @@
-From 36f10133d5ceee77e61a939075a89987714ccb68 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
 Date: Mon, 18 Jun 2018 14:45:24 +0000
 Subject: [PATCH] Add pybench for pgo optimization
@@ -9624,6 +9624,3 @@ index 0000000..5e00891
 +    print()
 +    test_workload()
 +    test_idle()
--- 
-2.17.1
-

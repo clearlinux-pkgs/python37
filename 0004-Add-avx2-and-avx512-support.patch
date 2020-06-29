@@ -1,7 +1,7 @@
-From eee7713a16df0199b675cbac8f253c82d480903f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: William Douglas <william.douglas@intel.com>
 Date: Tue, 12 Jun 2018 18:52:58 +0000
-Subject: [PATCH 4/5] Add avx2 and avx512 support
+Subject: [PATCH] Add avx2 and avx512 support
 
 Enable support for python avx2 and avx512 libraries.
 ---
@@ -10,7 +10,7 @@ Enable support for python avx2 and avx512 libraries.
  2 files changed, 37 insertions(+), 1 deletion(-)
 
 diff --git a/Lib/distutils/unixccompiler.py b/Lib/distutils/unixccompiler.py
-index ab4d4de..de09d99 100644
+index 4d7a6de..9047798 100644
 --- a/Lib/distutils/unixccompiler.py
 +++ b/Lib/distutils/unixccompiler.py
 @@ -116,6 +116,10 @@ class UnixCCompiler(CCompiler):
@@ -24,7 +24,7 @@ index ab4d4de..de09d99 100644
          except DistutilsExecError as msg:
              raise CompileError(msg)
  
-@@ -194,6 +198,24 @@ class UnixCCompiler(CCompiler):
+@@ -202,6 +206,24 @@ class UnixCCompiler(CCompiler):
                      linker = _osx_support.compiler_fixup(linker, ld_args)
  
                  self.spawn(linker + ld_args)
@@ -83,6 +83,3 @@ index f271193..4315237 100644
  
      if (handle == NULL) {
          PyObject *mod_name;
--- 
-2.17.0
-

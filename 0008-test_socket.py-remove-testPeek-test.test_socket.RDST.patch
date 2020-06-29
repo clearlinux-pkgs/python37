@@ -1,4 +1,4 @@
-From 4ccbba674472dcca104fe660c0cd3dd23b6dd66d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Juro Bystricky <juro.bystricky@intel.com>
 Date: Thu, 3 Oct 2019 10:46:00 -0700
 Subject: [PATCH] test_socket.py: remove testPeek (test.test_socket.RDSTest)
@@ -12,10 +12,10 @@ Signed-off-by: Juro Bystricky <juro.bystricky@intel.com>
  1 file changed, 10 deletions(-)
 
 diff --git a/Lib/test/test_socket.py b/Lib/test/test_socket.py
-index 43929b355e..bcf8be854b 100644
+index 41ba53b..334ae44 100644
 --- a/Lib/test/test_socket.py
 +++ b/Lib/test/test_socket.py
-@@ -2011,16 +2011,6 @@ class RDSTest(ThreadedRDSSocketTest):
+@@ -2013,16 +2013,6 @@ class RDSTest(ThreadedRDSSocketTest):
          self.data = b'spam'
          self.cli.sendto(self.data, 0, (HOST, self.port))
  
@@ -32,6 +32,3 @@ index 43929b355e..bcf8be854b 100644
      @requireAttrs(socket.socket, 'recvmsg')
      def testSendAndRecvMsg(self):
          data, ancdata, msg_flags, addr = self.serv.recvmsg(self.bufsize)
--- 
-2.23.0
-

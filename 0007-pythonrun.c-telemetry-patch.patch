@@ -1,4 +1,4 @@
-From bf42ee70286b82975db9e4dc6da526d2e64ecf89 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Juro Bystricky <juro.bystricky@intel.com>
 Date: Fri, 4 Jan 2019 09:04:01 -0800
 Subject: [PATCH] pythonrun.c: telemetry patch
@@ -26,11 +26,11 @@ print any error messages. This should be the worst case scenario.
 
 Signed-off-by: Juro Bystricky <juro.bystricky@intel.com>
 ---
- Python/pythonrun.c | 274 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 274 insertions(+)
+ Python/pythonrun.c | 273 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 273 insertions(+)
 
 diff --git a/Python/pythonrun.c b/Python/pythonrun.c
-index c4ec5ac66c..1c1fbb67b1 100644
+index 4c974ce..dd32a37 100644
 --- a/Python/pythonrun.c
 +++ b/Python/pythonrun.c
 @@ -637,10 +637,280 @@ handle_system_exit(void)
@@ -314,7 +314,7 @@ index c4ec5ac66c..1c1fbb67b1 100644
  
      if (PyErr_ExceptionMatches(PyExc_SystemExit)) {
          handle_system_exit();
-@@ -668,6 +939,8 @@ PyErr_PrintEx(int set_sys_last_vars)
+@@ -668,6 +938,8 @@ PyErr_PrintEx(int set_sys_last_vars)
              PyErr_Clear();
          }
      }
@@ -323,7 +323,7 @@ index c4ec5ac66c..1c1fbb67b1 100644
      hook = _PySys_GetObjectId(&PyId_excepthook);
      if (hook) {
          PyObject* stack[3];
-@@ -712,6 +985,7 @@ PyErr_PrintEx(int set_sys_last_vars)
+@@ -712,6 +984,7 @@ PyErr_PrintEx(int set_sys_last_vars)
      Py_XDECREF(exception);
      Py_XDECREF(v);
      Py_XDECREF(tb);
@@ -331,6 +331,3 @@ index c4ec5ac66c..1c1fbb67b1 100644
  }
  
  static void
--- 
-2.23.0
-
