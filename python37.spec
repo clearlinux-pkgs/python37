@@ -6,7 +6,7 @@ Summary:        The Python Programming Language
 Url:            http://www.python.org
 Group:          devel/python
 Source0:        https://www.python.org/ftp/python/3.7.8/Python-3.7.8.tar.xz
-Source1:	constcompat.patch
+Source1:        constcompat.patch
 Patch1:         0001-Fix-python-path-for-linux.patch
 Patch2:         0002-Skip-tests-TODO-fix-skips.patch
 Patch3:         0003-Use-pybench-to-optimize-python.patch
@@ -65,8 +65,8 @@ The Python Programming Language.
 License:        Python-2.0
 Summary:        The Python Programming Language
 Group:          devel/python
-Requires:  	setuptools-python3
-Requires:  	setuptools-bin
+Requires:       setuptools-python3
+Requires:       setuptools-bin
 
 %description core
 The Python Programming Language.
@@ -77,7 +77,7 @@ Summary:        The Python Programming Language
 Group:          devel
 Requires:       python37-lib
 Requires:       python37-core
-Requires:	usrbinpython
+Requires:       usrbinpython
 
 %description dev
 The Python Programming Language.
