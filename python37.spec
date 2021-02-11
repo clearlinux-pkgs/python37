@@ -1,6 +1,6 @@
 Name:           python37
 Version:        3.7.9
-Release:        17
+Release:        18
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
@@ -16,6 +16,7 @@ Patch6:         0006-Add-pybench-for-pgo-optimization.patch
 Patch7:         0007-pythonrun.c-telemetry-patch.patch
 Patch8:         0008-test_socket.py-remove-testPeek-test.test_socket.RDST.patch
 Patch9:         CVE-2020-27619.patch
+Patch10:        CVE-2021-3177.patch
 
 BuildRequires:  bzip2
 BuildRequires:  db
@@ -93,6 +94,7 @@ The Python Programming Language.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 pushd ..
 cp -a Python-%{version} Python-avx2
