@@ -1,11 +1,11 @@
 Name:           python37
-Version:        3.7.9
-Release:        18
+Version:        3.7.10
+Release:        19
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
 Group:          devel/python
-Source0:        https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz
+Source0:        https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
 Source1:        constcompat.patch
 Patch1:         0001-Fix-python-path-for-linux.patch
 Patch2:         0002-Skip-tests-TODO-fix-skips.patch
@@ -15,8 +15,6 @@ Patch5:         0005-Build-avx2-and-avx512-versions-of-the-math-library.patch
 Patch6:         0006-Add-pybench-for-pgo-optimization.patch
 Patch7:         0007-pythonrun.c-telemetry-patch.patch
 Patch8:         0008-test_socket.py-remove-testPeek-test.test_socket.RDST.patch
-Patch9:         CVE-2020-27619.patch
-Patch10:        CVE-2021-3177.patch
 
 BuildRequires:  bzip2
 BuildRequires:  db
@@ -93,8 +91,6 @@ The Python Programming Language.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
-%patch10 -p1
 
 pushd ..
 cp -a Python-%{version} Python-avx2
