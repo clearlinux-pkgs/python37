@@ -1,11 +1,11 @@
 Name:           python37
-Version:        3.7.10
-Release:        22
+Version:        3.7.11
+Release:        23
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
 Group:          devel/python
-Source0:        https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
+Source0:        https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz
 Source1:        constcompat.patch
 Patch1:         0001-Fix-python-path-for-linux.patch
 Patch2:         0002-Skip-tests-TODO-fix-skips.patch
@@ -101,7 +101,7 @@ popd
 %build
 %define python_configure_flags  --with-threads --with-pymalloc  --without-cxx-main --with-signal-module --enable-ipv6=yes  --libdir=/usr/lib  ac_cv_header_bluetooth_bluetooth_h=no  ac_cv_header_bluetooth_h=no  --with-system-ffi --with-system-expat --with-lto=8 --with-computed-gotos
 
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3"
 %configure %python_configure_flags --enable-shared
 make %{?_smp_mflags}

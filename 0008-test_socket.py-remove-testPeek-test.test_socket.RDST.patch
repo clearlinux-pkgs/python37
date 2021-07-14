@@ -12,10 +12,10 @@ Signed-off-by: Juro Bystricky <juro.bystricky@intel.com>
  1 file changed, 10 deletions(-)
 
 diff --git a/Lib/test/test_socket.py b/Lib/test/test_socket.py
-index 41ba53b..334ae44 100644
+index 5f4b019..03c0642 100644
 --- a/Lib/test/test_socket.py
 +++ b/Lib/test/test_socket.py
-@@ -2013,16 +2013,6 @@ class RDSTest(ThreadedRDSSocketTest):
+@@ -2015,16 +2015,6 @@ class RDSTest(ThreadedRDSSocketTest):
          self.data = b'spam'
          self.cli.sendto(self.data, 0, (HOST, self.port))
  
