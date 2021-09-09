@@ -1,11 +1,11 @@
 Name:           python37
-Version:        3.7.11
-Release:        23
+Version:        3.7.12
+Release:        24
 License:        Python-2.0
 Summary:        The Python Programming Language
 Url:            http://www.python.org
 Group:          devel/python
-Source0:        https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tar.xz
+Source0:        https://www.python.org/ftp/python/3.7.12/Python-3.7.12.tar.xz
 Source1:        constcompat.patch
 Patch1:         0001-Fix-python-path-for-linux.patch
 Patch2:         0002-Skip-tests-TODO-fix-skips.patch
